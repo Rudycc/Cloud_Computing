@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= bucket
+  p Welcome to S3 Client
+  p List of Objects
+  
+  table
+    tr
+        td Name
+        td View
+    each content in contents
+        tr
+            td= content.Key
+            td #[a(href='/#{bucket}/#{content.Key}/') View]
+
+  br
+  br
+  form(name="add-object", action="/#{bucket}", method="post", enctype="multipart/form-data")
+      div.input
+          span.label Add new object
+          input(type="file", name="object")
+          input(type="submit", value="Agregar")
